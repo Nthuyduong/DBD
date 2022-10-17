@@ -37,3 +37,30 @@ values('Hiace', 'Toyota',16),
 ('Grand-i10', 'hyundai',7);
 
 select * from DONGXE;
+
+insert into DANGKYCUNGCAP (MaDKCC,MaNhaCC,MaLoaiDV,DongXe,MaMP,NgayBatDauCungCap,NgayKetThucCungCap,SoLuongXeDangKy)
+values('DK001','NCC001','DV01','Hiace'),
+('DK002','NCC002','DV02','Vios'),
+('DK003','NCC003','DV03','Escape'),
+('DK004','NCC005','DV01','Cerato'),
+('DK005','NCC002','DV02','Forte'),
+('DK006','NCC004','DV03','Starex'),
+('DK007','NCC005','DV01','Cerato'),
+('DK008','NCC006','DV01','Vios'),
+('DK009','NCC005','DV03','Grand-i10'),
+('DK010','NCC006','DV01','Forte'),
+('DK011','NCC007','DV01','Forte'),
+('DK012','NCC007','DV03','Cerato'),
+('DK013','NCC003','DV02','Cerato'),
+('DK014','NCC008','DV02','Cerato'),
+('DK015','NCC003','DV01','Hiace'),
+('DK016','NCC001','DV03','Grand-i10'),
+('DK017','NCC002','DV03','Cerato'),
+('DK018','NCC008','DV03','Escape'),
+('DK019','NCC003','DV03','Escape'),
+('DK020','NCC002','DV03','Cerato'),
+('DK021','NCC006','DV01','Forte'),
+('DK022','NCC002','DV02','Cerato'),
+('DK023','NCC002','DV01','Forte'),
+('DK024','NCC003','DV03','Forte'),
+('DK025','NCC003','DV03','Hiace');
