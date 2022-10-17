@@ -13,12 +13,12 @@ create table LOAIDICHVU(
 
 create table MUCPHI(
     MaMP varchar(10) primary key not null,
-    DonGia decimal(12,4) not null,
-    Mota text
+    DonGia decimal(12,4) not null check(DonGia>0),
+    Mota ntext
 );
 
 create table DONGXE(
-    DongXe varchar(100) primary key not null,
+    DongXe varchar(100) primary key,
     HangXe varchar(100) not null,
     SoChoNgoi int not null
 );
@@ -29,6 +29,8 @@ create table DANGKYCUNGCAP(
     MaLoaiDV varchar(10) not null foreign key references LOAIDICHVU(MaLoaiDV),
     DongXe varchar(100) not null foreign key references DONGXE(DongXe),
     MaMP varchar(10) not null foreign key references MUCPHI(MaMP),
-    NgayBatDauCungCap datetime not null,
+    NgayBatDauCungCap date not null,
+    NgayKetThucCungCap date not null,
     SoLuongXeDangKy int not null
 );
+drop table DANGKYCUNGCAP;
