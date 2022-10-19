@@ -1,11 +1,21 @@
 insert into firm (Code,Name,Address,Tel)
-values(123, 'Asus', 'USA','983232');
+values(123, 'Asus', 'USA','983232'),
+(134, 'Dell', 'Uk','789679'),
+(110, 'HP', 'CHINA','189676');
 
 select * from firm;
 
 insert into product (Name, Description, Unit, Price,Quantity,FirmCode)
-values(N'Máy Tính T450', N'Máy nhập cũ',N'Chiếc',1000,10,1),
-(N'Điện Thoại Nokia5670', N'Điện thoại đang hot',N'Chiếc',200,200,1),
-(N'Máy In Samsung 450', N'Máy in đang loại bình',N'Chiếc',100,10,1);
+values(N'Máy Tính T450', N'Máy nhập cũ',N'Chiếc',1000,10,110),
+(N'Điện Thoại Nokia5670', N'Điện thoại đang hot',N'Chiếc',200,200,110),
+(N'Máy In Samsung 450', N'Máy in đang loại bình',N'Chiếc',100,10,110),
+
+(N'Máy Tính T450', N'Máy nhập cũ',N'Chiếc',200,10,123),
+(N'Điện Thoại Dell420', N'Điện thoại đang hot',N'Chiếc',600,200,123),
+(N'Máy In D200', N'Máy in đang loại bình',N'Chiếc',400,10,123,
+
+(N'Máy Tính T450', N'Máy nhập cũ',N'Chiếc',400,10,134),
+(N'Điện Thoại Nokia5670', N'Điện thoại hot',N'Chiếc',1000,200,134),
+(N'Máy In Samsung 450', N'Máy in đang loại bình',N'Chiếc',200,10,134;
 
 select * from product;
