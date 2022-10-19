@@ -22,3 +22,11 @@ select * from product;
 select Name from firm;
 --Hien thi tat ca cac san pham
 select Name from product;
+
+--Liet ke danh sach hang theo thu tu nguoc lai Alphabet
+select Name from firm order by Name desc;
+--Liet ke danh sach gia san pham theo thu tu gia giam dan
+select Price from product order by Price asc;
+--Hien thi thong tin hang Assus
+select * from firm where Name like 'Asus';
+--Liet ke danh sach san pham con it hon 11 chiec trong kho
