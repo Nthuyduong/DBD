@@ -86,23 +86,30 @@ select * from NHACUNGCAP where
 
 --5 Liet ke thong tin toan bo nha cung cap duoc sap xep tang dan theo ten ncc
 --va giam dan theo ma so thue
-select * from NHACUNGCAP order by TenNhaCC desc, MaSoThue desc;
+select * from NHACUNGCAP order by TenNhaCC asc, MaSoThue desc;
 
 --6  Dem so lan dang ky cung cap phuong tien tuong ung cho tung nha cung cap
 --voi yeu cau chi dem cho nhung nha cung cap thuc hien dang ky cung cap co ngay bat dau
 --cung cap la '20/11/2015'
-select count(MaNhaCC) as solandangky from DANGKYCUNGCAP where NgayBatDauCungCap = '2022-11-20';
+select MaNhaCC,count(*) as SoLanDangKy from DANGKYCUNGCAP where NgayBatDauCungCap >= '2015-11-20' group by MaNhaCC;
 
 --7 Liet ke ten toan bo cac hang xe co trong co so du lieu voi yeu cau
 --moi hang xe chi duoc liet ke mot lan
 select distinct HangXe from DONGXE;
 
---8 
+--8 Noi bang
+select distinct a.MaDKCC, a.MaNhaCC, b.TenNhaCC, b.DiaChi, b.MaSoThue, c.TenLoaiDV, d.DonGia, e.HangXe, a.NgayBatDauCungCap, a.NgayKetThucCungCap
+from DANGKYCUNGCAP a
+right join NHACUNGCAP on 
+left join DONGXE on
+left join MUCPHI on
+left join LOAIDICHVU e ọn
 
 --9 Liet ke nha cung cap da tung dang ky cung cap phuong tien thuoc dong xe 'Hiace' or 'Cerato'
 select * from NHACUNGCAP where MaNhaCC in
     (select MaNhaCC from DANGKYCUNGCAP where DongXe like N'Hiace');
 
 --10 Liệt kê thông tin của các nhà cung cấp chưa từng thực hiện đăng ký cung cấp phương tiện lần nào cả.
+select * from NHACUNGCAP where MaNhaCC not in (select MaNhaCC from DANGKYCUNGCAP);
 
 
