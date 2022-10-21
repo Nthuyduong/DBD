@@ -71,11 +71,12 @@ select * from DANGKYCUNGCAP;
 --TRUY VAN
 --Cau3
 select DongXe from DONGXE where SoChoNgoi > 5;
+
 --4 Liet ke thong tin nha cung cap da tung dang ky cung cap nhung dong xe
 --Thuoc hang xe 'Toyota' vs muc phi co don gia la 15k/km hoac 'Kia' voi muc phi 20k/km
 select * from NHACUNGCAP where MaNhaCC in
-    (select MaNhaCC from DANGKYCUNGCAP where DongXe
-    (select Dongxe from DONGXE where HangXe like N'Toyota');
+    (select MaNhaCC from DANGKYCUNGCAP where DongXe in
+    (select Dongxe from DONGXE where HangXe like N'Toyota'));
 
 --5 Liet ke thong tin toan bo nha cung cap duoc sap xep tang dan theo ten ncc
 --va giam dan theo ma so thue
@@ -90,7 +91,7 @@ select count(MaNhaCC) as solandangky from DANGKYCUNGCAP where NgayBatDauCungCap 
 --moi hang xe chi duoc liet ke mot lan
 select distinct HangXe from DONGXE;
 
---8
+--8 
 
 --9 Liet ke nha cung cap da tung dang ky cung cap phuong tien thuoc dong xe 'Hiace' or 'Cerato'
 select * from NHACUNGCAP where MaNhaCC in
