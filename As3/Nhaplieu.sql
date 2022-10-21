@@ -98,12 +98,12 @@ select MaNhaCC,count(*) as SoLanDangKy from DANGKYCUNGCAP where NgayBatDauCungCa
 select distinct HangXe from DONGXE;
 
 --8 Noi bang
-select distinct a.MaDKCC, a.MaNhaCC, b.TenNhaCC, b.DiaChi, b.MaSoThue, c.TenLoaiDV, d.DonGia, e.HangXe, a.NgayBatDauCungCap, a.NgayKetThucCungCap
+select distinct a.MaDKCC, a.MaNhaCC, b.TenNhaCC, b.DiaChi, b.MaSoThue, e.TenLoaiDV, d.DonGia, c.HangXe, a.NgayBatDauCungCap, a.NgayKetThucCungCap
 from DANGKYCUNGCAP a
-right join NHACUNGCAP on 
-left join DONGXE on
-left join MUCPHI on
-left join LOAIDICHVU e ọn
+right join NHACUNGCAP B on a.MaNhaCC = b.MaNhaCC
+left join DONGXE C on a.DongXe = c.DongXe
+left join MUCPHI D on a.MaMP = d.MaMP
+left join LOAIDICHVU E on a.MaLoaiDV = e.MaLoaiDV;
 
 --9 Liet ke nha cung cap da tung dang ky cung cap phuong tien thuoc dong xe 'Hiace' or 'Cerato'
 select * from NHACUNGCAP where MaNhaCC in
