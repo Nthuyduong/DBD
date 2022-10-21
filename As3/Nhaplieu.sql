@@ -21,10 +21,10 @@ values('DV01', N'Dịch vụ xe taxi'),
 select * from LOAIDICHVU;
 
 insert into MUCPHI (MaMP,DonGia, MoTa)
-values('MP01',10.000, N'Áp dụng từ 1/2015'),
-('MP02',15.000, N'Áp dụng từ 2/2015'),
-('MP03',20.000, N'Áp dụng từ 1/2010'),
-('MP04',25.000, N'Áp dụng từ 2/2011');
+values('MP01',10000, N'Áp dụng từ 1/2015'),
+('MP02',15000, N'Áp dụng từ 2/2015'),
+('MP03',20000, N'Áp dụng từ 1/2010'),
+('MP04',25000, N'Áp dụng từ 2/2011');
 
 select * from MUCPHI;
 
@@ -74,9 +74,15 @@ select DongXe from DONGXE where SoChoNgoi > 5;
 
 --4 Liet ke thong tin nha cung cap da tung dang ky cung cap nhung dong xe
 --Thuoc hang xe 'Toyota' vs muc phi co don gia la 15k/km hoac 'Kia' voi muc phi 20k/km
-select * from NHACUNGCAP where MaNhaCC in
+select * from NHACUNGCAP where
+    MaNhaCC in
     (select MaNhaCC from DANGKYCUNGCAP where DongXe in
-    (select Dongxe from DONGXE where HangXe like N'Toyota'));
+        (select Dongxe from DONGXE where HangXe like N'Toyota') and MaMP in
+            (select MaMP from MUCPHI where DonGia = 15000))
+    or MaNhaCC in
+    (select MaNhaCC from DANGKYCUNGCAP where DongXe in
+        (select Dongxe from DONGXE where HangXe like N'Kia') and MaMP in
+    (select MaMP from MUCPHI where DonGia = 20000));
 
 --5 Liet ke thong tin toan bo nha cung cap duoc sap xep tang dan theo ten ncc
 --va giam dan theo ma so thue
@@ -96,4 +102,7 @@ select distinct HangXe from DONGXE;
 --9 Liet ke nha cung cap da tung dang ky cung cap phuong tien thuoc dong xe 'Hiace' or 'Cerato'
 select * from NHACUNGCAP where MaNhaCC in
     (select MaNhaCC from DANGKYCUNGCAP where DongXe like N'Hiace');
+
+--10 Liệt kê thông tin của các nhà cung cấp chưa từng thực hiện đăng ký cung cấp phương tiện lần nào cả.
+
 
