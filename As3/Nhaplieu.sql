@@ -2,14 +2,14 @@
 insert into NHACUNGCAP (MaNhaCC, TenNhaCC, DiaChi, SoDT, MaSoThue)
 values('NCC001', N'Cty TNHH Toàn Pháp', N'Hai Chau','05113999888', '568941'),
 ('NCC002', N'Cty Cổ phần Đông Du', N'Lien Chieu','05113999889', '456789'),
-('NCC003', N'Ông Nguyễn Văn A', N'Lien Chieu','05113999890','456789'),
+('NCC003', N'Ông Nguyễn Văn A', N'Lien Chieu','05113999890','321456'),
 ('NCC004', N'Cty Cổ phần Toàn Cầu Xanh', N'Hai Chau','05113658945','513364'),
-('NCC005', N'Cty TNHH AMA', N'Thanh Khe','05113875466','456789'),
-('NCC006', N'Bà Trần Thị Bích Vân', N'Lien Chieu','05113587469','456789'),
-('NCC007', N'Cty TNHH Phan Thành', N'Thanh Khe','05113987456','456789'),
-('NCC008', N'Ông Phan Đình Nam', N'Hoa Thuan','05113532456','456789'),
-('NCC009', N'Tập đoàn Đông Nam Á', N'Lien Chieu','05113987121','456789'),
-('NCC010', N'Cty Cổ phần Rạng Đông', N'Lien Chieu','05113569654','456789');
+('NCC005', N'Cty TNHH AMA', N'Thanh Khe','05113875466','546546'),
+('NCC006', N'Bà Trần Thị Bích Vân', N'Lien Chieu','05113587469','524545'),
+('NCC007', N'Cty TNHH Phan Thành', N'Thanh Khe','05113987456','113021'),
+('NCC008', N'Ông Phan Đình Nam', N'Hoa Thuan','05113532456','121230'),
+('NCC009', N'Tập đoàn Đông Nam Á', N'Lien Chieu','05113987121','533654'),
+('NCC010', N'Cty Cổ phần Rạng Đông', N'Lien Chieu','05113569654','187864');
 
 select * from NHACUNGCAP;
 
@@ -67,3 +67,32 @@ values('DK001','NCC001','DV01','Hiace','MP01','2015-11-20','2016-11-20',4),
 ('DK025','NCC003','DV03','Hiace','MP02','2016-08-24','2017-10-25',1);
 
 select * from DANGKYCUNGCAP;
+
+--TRUY VAN
+--Cau3
+select DongXe from DONGXE where SoChoNgoi > 5;
+--4 Liet ke thong tin nha cung cap da tung dang ky cung cap nhung dong xe
+--Thuoc hang xe 'Toyota' vs muc phi co don gia la 15k/km hoac 'Kia' voi muc phi 20k/km
+select * from NHACUNGCAP where MaNhaCC in
+    (select MaNhaCC from DANGKYCUNGCAP where DongXe
+    (select Dongxe from DONGXE where HangXe like N'Toyota');
+
+--5 Liet ke thong tin toan bo nha cung cap duoc sap xep tang dan theo ten ncc
+--va giam dan theo ma so thue
+select * from NHACUNGCAP order by TenNhaCC desc, MaSoThue desc;
+
+--6  Dem so lan dang ky cung cap phuong tien tuong ung cho tung nha cung cap
+--voi yeu cau chi dem cho nhung nha cung cap thuc hien dang ky cung cap co ngay bat dau
+--cung cap la '20/11/2015'
+select count(MaNhaCC) as solandangky from DANGKYCUNGCAP where NgayBatDauCungCap = '2022-11-20';
+
+--7 Liet ke ten toan bo cac hang xe co trong co so du lieu voi yeu cau
+--moi hang xe chi duoc liet ke mot lan
+select distinct HangXe from DONGXE;
+
+--8
+
+--9 Liet ke nha cung cap da tung dang ky cung cap phuong tien thuoc dong xe 'Hiace' or 'Cerato'
+select * from NHACUNGCAP where MaNhaCC in
+    (select MaNhaCC from DANGKYCUNGCAP where DongXe like N'Hiace');
+
