@@ -14,6 +14,7 @@ values(N'Nguyễn Văn An',1,1);
 
 select * from DanhBaNguoiDung;
 
+--Them du lieu cua moi nguoi
 insert into DanhBa (Phone)
 values('09866666,09899999,09988888');
 
@@ -25,17 +26,21 @@ values(N'Lê Ngọc Hân',(select Id from DanhBa where Id=2),(select Id from Ngu
 
 --4
 --Liet ke danh sach nhung nguoi trong danh ba
-select Name 
+select Name from DanhBaNguoiDung;
 --Liet ke danh sach so dien thoai co trong danh ba
 select * from DanhBa;
 
 --5
 --Liet ke danh sach nguoi trong danh ba theo Alphabet
+select Name from DanhBaNguoiDung order by Name asc;
 --Liet ke cac so dien thoai cua nguoi co ten la Nguyen Van An
+select Phone from DanhBa where Id in
+        (select DanhBaId from DanhBaNguoiDung where Name like N'Nguyễn Văn An');
 --Liet ke nguoi co ngay sinh 12/12/09
 
 --6
 --Tim so luong sdt cua moi nguoi trong danh ba
+
 --Tim tong so nguoi trong danh ba sinh thang 12
 --Hien thi thong tin ve nguoi, cua tung sdt
 --Hien thi toan bo thong tin ve nguoi, cua so dien thoai 123456789
