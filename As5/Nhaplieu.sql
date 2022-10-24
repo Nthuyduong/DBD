@@ -42,7 +42,14 @@ select Phone from DanhBa where Id in
 --Tim so luong sdt cua moi nguoi trong danh ba
 
 --Tim tong so nguoi trong danh ba sinh thang 12
+
 --Hien thi thong tin ve nguoi, cua tung sdt
 --Hien thi toan bo thong tin ve nguoi, cua so dien thoai 123456789
 
---
+--7
+--Thay doi truong ngay sinh la truoc ngay hien tai
+alter table NguoiDung add check(DOB < getdate());
+--Xac dinh cac truong khoa ngoai và truong khoa chinh
+
+--Viet cau lenh de tem truong ngay bat dau lien lac
+alter table NguoiDung add BatDauLienLac date;
