@@ -1,21 +1,33 @@
 --3
 insert into DanhBa (Phone)
-values('987654321'),
-('09873452'),
-('09832323'),
-('09434343');
+values('987654321,09873452,09832323,09434343');
 
 select * from DanhBa;
 
 insert into NguoiDung (Address,DOB)
-values(N'Nguyễn Văn An',N'111 Nguyễn Trãi, Thanh Xuân, Hà Nội','1987-11-18');
+values(N'111 Nguyễn Trãi, Thanh Xuân, Hà Nội','1987-11-18');
 
 select * from NguoiDung;
 
+insert into DanhBaNguoiDung (Name,DanhBaId,NguoiDungId)
+values(N'Nguyễn Văn An',1,1);
+
+select * from DanhBaNguoiDung;
+
+insert into DanhBa (Phone)
+values('09866666,09899999,09988888');
+
+insert into NguoiDung(Address,DOB)
+values(N'10 Nguyễn Tuân, Thanh Xuân, Hà Nội','1985-12-10');
+
+insert into DanhBaNguoiDung(Name,DanhBaId,NguoiDungId)
+values(N'Lê Ngọc Hân',(select Id from DanhBa where Id=2),(select Id from NguoiDung where Id=2));
+
 --4
 --Liet ke danh sach nhung nguoi trong danh ba
+select Name 
 --Liet ke danh sach so dien thoai co trong danh ba
-select Phone from DanhBa;
+select * from DanhBa;
 
 --5
 --Liet ke danh sach nguoi trong danh ba theo Alphabet

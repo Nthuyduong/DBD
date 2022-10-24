@@ -1,18 +1,18 @@
 create table NHACUNGCAP(
-    MaNhaCC varchar(10) primary key not null,
+    MaNhaCC varchar(10) primary key,
     TenNhaCC nvarchar(255) not null unique,
     DiaChi nvarchar(255) not null,
     SoDT varchar(15) not null unique check(SoDT like '0%'),
-    MaSoThue varchar(100)
+    MaSoThue varchar(100) unique
 );
 
 create table LOAIDICHVU(
-    MaLoaiDV varchar(10) primary key not null,
+    MaLoaiDV varchar(10) primary key,
     TenLoaiDV nvarchar(255) not null
 );
 
 create table MUCPHI(
-    MaMP varchar(10) primary key not null,
+    MaMP varchar(10) primary key,
     DonGia decimal(12,4) not null check(DonGia>0),
     Mota ntext
 );
@@ -33,4 +33,6 @@ create table DANGKYCUNGCAP(
     NgayKetThucCungCap date not null,
     SoLuongXeDangKy int not null
 );
-drop table DANGKYCUNGCAP;
+
+drop table DANGKYCUNGCAP, DONGXE, MUCPHI,LOAIDICHVU, NHACUNGCAP;
+
