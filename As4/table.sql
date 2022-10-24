@@ -2,7 +2,7 @@ create table firm(
     Code int primary key,
     Name varchar(255) not null,
     Address varchar(255) not null,
-    Tel varchar(15)
+    Tel varchar(15) not null unique
 );
 
 create table product(
@@ -15,3 +15,4 @@ create table product(
     FirmCode int not null foreign key references firm(Code)
 );
 
+drop table product,firm;

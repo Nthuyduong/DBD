@@ -1,26 +1,26 @@
-Create table Clients(
-    Name nvarchar(50) not null,
-    Address varchar(100) not null,
-    Phone varchar(10) unique,
-    ID int primary key identity(1,1)
+create table Asm3_Customers(
+Id int primary key identity(1,1),
+Name nvarchar(255) not null,
+Address nvarchar(255) not null,
+Tel varchar(15) not null unique check(Tel like '0%')
 );
-
-Create table Orders(
-    Code int not null unique,
-    Orderdate date not null check(Orderdate <= getdate()),
-    ClientsID int not null foreign key references Clients(ID)
+create table Asm3_Products(
+Id int primary key identity(1,1),
+Name nvarchar(100) not null unique,
+Description ntext,
+Unit nvarchar(50) not null check(Unit in (N'Chiếc',N'Cặp',N'Bộ')),
+Price decimal(12,4) not null check(Price >=0) default 0
 );
-
-Create table Equipments(
-    Price int not null,
-    Description text,
-    Name varchar(255) not null,
-    Quantity int not null,
-    Unit varchar(10) not null,
-    ID int primary key identity(1,1)
+create table Asm3_Orders(
+Id int primary key identity(1,1),
+OrderDate date not null check(OrderDate <= GetDate()),
+GrandTotal decimal(12,4) not null check(GrandTotal >=0),
+CustomerId int not null foreign key references Asm3_Customers(Id)
 );
-
-Create table OrdersEquipments(
-    OrderCode int not null foreign key references Orders(Code),
-    EquipmentID int not null foreign key references Equipments(ID)
+create table Asm3_OrderItems(
+Qty int not null check(Qty>0),
+Total decimal(12,4) not null check(Total>=0),
+ProductId int not null foreign key references Asm3_Products(Id),
+OrderId int not null foreign key references Asm3_Orders(Id)
 );
+drop table Asm3_OrderItems,Asm3_Orders,Asm3_Products,Asm3_Customers;
