@@ -64,16 +64,25 @@ N'Cuốn sách Kinh điển về Tư duy, Kỹ năng mà bất cứ ai cũng nê
 insert into BookAuthor(BookCode,AuthorId)
 values('B002',2),('B003',3),('B004',4),('B005',5),('B006',6),('B007',7),('B008',7),('B009',1);
 
---4 liet ke 10 cuon sach co gia ban cao nhat
-
+--4 liet ke 5 cuon sach co gia ban cao nhat
+select top 50 percent * from Books order by Price desc;
 --5 Tim nhung cuon sach co tieu de chua tu 'tin học'
 select Name from Books where Name like N'%tin học%';
 --6 Liet ke nhung cuon sach bat dau bang chu T theo thu tu giam dan ve gia
 select Name from Books where Name like N'T%'order by Price desc;
 --7 Liet ke sach cua nha suat ban tri thuc
-
+select Name from Books where PublisherId in
+    (select Id from Publishers where Name like N'Tri Thức');
 --8 Lay thong tin chi tiet ve nha xuat ban cuon sach 'Tri tue Do Thai'
-
+select * from Publishers where Id in
+    (select PublisherId from Books where Name like N'Trí tuệ Do Thái');
 --9 Hien thi thong tin sau ve nhung cuon sach: Ma sach, Ten sach, Nam xuat ban, Nha xuat ban, Loai sach
 
 --10 Tim cuon sach co gia ban cao nhat
+select top 1 * from Books order by Price desc;
+--11 tim sach co so luong nhieu nhat trong kho
+select top 1 * from Books order by Quantity desc;
+--12 tim sach cua tac gia 'Eran Katz'
+select Name from Books where Code in 
+    (select BookCode from BookAuthor where AuthorId in 
+        (select Id from Authors where Name like N'Eran Katz'));
