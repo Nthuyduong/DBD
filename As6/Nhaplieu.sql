@@ -64,6 +64,8 @@ N'Cuốn sách Kinh điển về Tư duy, Kỹ năng mà bất cứ ai cũng nê
 insert into BookAuthor(BookCode,AuthorId)
 values('B002',2),('B003',3),('B004',4),('B005',5),('B006',6),('B007',7),('B008',7),('B009',1);
 
+--3Liet ke cac cuon sach xuat ban tu nam 2008 den nay
+select * from Books where YearOfPublication >=2008;
 --4 liet ke 5 cuon sach co gia ban cao nhat
 select top 50 percent * from Books order by Price desc;
 --5 Tim nhung cuon sach co tieu de chua tu 'tin học'
@@ -77,7 +79,10 @@ select Name from Books where PublisherId in
 select * from Publishers where Id in
     (select PublisherId from Books where Name like N'Trí tuệ Do Thái');
 --9 Hien thi thong tin sau ve nhung cuon sach: Ma sach, Ten sach, Nam xuat ban, Nha xuat ban, Loai sach
-    
+select a.Code,a.Name as bookName,a.YearOfPublication, c.Name as pubName
+,b.Name as catName from Books a
+left join Genres b on a.GenreId = b.Id
+left join Publishers c on a.PublisherId = c.Id;
 --10 Tim cuon sach co gia ban cao nhat
 select top 1 * from Books order by Price desc;
 --11 tim sach co so luong nhieu nhat trong kho
@@ -90,10 +95,47 @@ select Name from Books where Code in
 update Books set Price = Price - (0.1*Price) where YearOfPublication < '2008';
 --14 Thong ke so dau sach cua moi nha xuat ban
 select count(Name) as SoLuongDauSach from Books group by PublisherId;
+
+select * from Publishers a
+left join  (select PublisherId,count(*) as SoluongSach from Books
+group by PublisherId) b on a.Id  = b.PublisherId;
 --15 Thong ke so dau sach cua moi loai sach
 select count(Name) as SoLuongDauSach from Books group by GenreId;
 --16 Dat chi muc Index cho truong ten sach
-create index chi_muc_vat_ly on Books(Name);
+create index bookname_index on Books(Name);
 --17 Viet view lay thong tin: Ma sach, Ten Sach, Tac gia, NXB, Gia ban
-create view BangThongTin as
-select 
+create view thong_tin_sach as
+ select a.Code,a.Name, a.Price,b.Name as PubName, d.Name as authorName
+  from Books a
+ left join Publishers b on a.PublisherId = b.Id
+ left join BookAuthor c on c.BookCode = a.Code
+ left join Authors d on c.AuthorId = d.Id;
+--18 Viet Store Procedure
+--Them mot cuon sach moi
+create procedure them_sach @code varchar(10), @name nvarchar(255),
+@price decimal(12,4), @year varchar(10),@num int,@sumary ntext,@qty int,
+@genid int,@pubid int as
+insert into Books(NumberOfPublication,Code,Name,YearOfPublication,Summary,
+Price,Quantity,GenreId,PublisherId)
+values(@num,@code,@name,@year,@sumary,@price,@qty,@genid,@pubid);
+--Tim cuon sach theo tu khoa
+create procedure tim_sach @q nvarchar(100) as
+select * from As6_Books where Name like N'%'+@q+'%';
+--Liet ke sach theo ma chuyen muc
+create procedure liet_ke_theo_chuyen_muc @genId int as
+select * from As6_Books where GenreId = @genId;
+--19 Viet trigger khong cho phep xoa nhung cuon sach van con trong kho (so luong >0)
+create trigger ko_xoa_sach 
+on As6_Books 
+after delete
+as
+if exists (select * from deleted where Quantity > 0)
+rollback transaction;
+--20 trigger chi cho phep xoa mot danh muc sach khi khong con cuon sach nao thuoc chuyen muc nay
+create trigger ko_xoa_danh_muc
+on As6_Genres
+after delete
+as 
+if exists (select * from deleted where Id in 
+(select * from As6_Books))
+ rollback transaction;

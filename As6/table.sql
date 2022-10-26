@@ -18,7 +18,7 @@ create table Books(
     NumberOfPublication int not null,
     Code varchar(10) primary key not null,
     Name nvarchar(255) not null unique,
-    YearOfPublication varchar(10) not null,
+    YearOfPublication int not null,
     Summary ntext not null,
     Price decimal(12,4) not null check(Price > 0),
     Quantity int not null check(Quantity >= 0),
