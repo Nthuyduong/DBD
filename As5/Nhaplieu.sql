@@ -48,8 +48,7 @@ select Phone from DanhBa where Id in
 
 --6
 --Tim so luong sdt cua moi nguoi trong danh ba
-select count(Phone) as SoLuongSoDT from DanhBa where Id in 
-    (select DanhBaId from DanhBaNguoiDung) group by Id;
+select Name,count(DanhBaID) as SoLuongSoDT from DanhBaNguoiDung group by Name;
 --Tim tong so nguoi trong danh ba sinh thang 12
 
 --Hien thi thong tin ve nguoi, cua tung sdt
