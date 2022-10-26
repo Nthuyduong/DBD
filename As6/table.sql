@@ -16,7 +16,7 @@ create table Authors(
 
 create table Books(
     NumberOfPublication int not null,
-    Code varchar(10) not null unique,
+    Code varchar(10) primary key not null,
     Name nvarchar(255) not null unique,
     YearOfPublication varchar(10) not null,
     Summary ntext not null,
