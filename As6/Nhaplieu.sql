@@ -77,7 +77,7 @@ select Name from Books where PublisherId in
 select * from Publishers where Id in
     (select PublisherId from Books where Name like N'Trí tuệ Do Thái');
 --9 Hien thi thong tin sau ve nhung cuon sach: Ma sach, Ten sach, Nam xuat ban, Nha xuat ban, Loai sach
-
+    
 --10 Tim cuon sach co gia ban cao nhat
 select top 1 * from Books order by Price desc;
 --11 tim sach co so luong nhieu nhat trong kho
