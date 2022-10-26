@@ -19,7 +19,7 @@ create table Books(
     Code varchar(10) not null unique,
     Name nvarchar(255) not null unique,
     YearOfPublication varchar(10) not null,
-    Summary text not null,
+    Summary ntext not null,
     Price decimal(12,4) not null check(Price > 0),
     Quantity int not null check(Quantity >= 0),
     GenreId int not null foreign key references Genres(Id),
@@ -30,3 +30,5 @@ create table BookAuthor(
     BookCode varchar(10) not null foreign key references Books(Code),
     AuthorId int not null foreign key references Authors(Id)
 );
+
+drop table BookAuthor,Books,Authors,Publishers,Genres;
