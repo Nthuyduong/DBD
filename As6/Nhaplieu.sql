@@ -86,3 +86,12 @@ select top 1 * from Books order by Quantity desc;
 select Name from Books where Code in 
     (select BookCode from BookAuthor where AuthorId in 
         (select Id from Authors where Name like N'Eran Katz'));
+--13 giam gia ban 10% nhung cuon sach xuat ban truoc nam 2008
+
+--14 Thong ke so dau sach cua moi nha xuat ban
+select count(Name) as SoLuongDauSach from Books group by PublisherId;
+--15 Thong ke so dau sach cua moi loai sach
+select count(Name) as SoLuongDauSach from Books group by GenreId;
+--16 Dat chi muc Index cho truong ten sach
+create index chi_muc_vat_ly on Books(Name);
+--17
