@@ -1,6 +1,9 @@
 --3
 insert into DanhBa (Phone)
-values('987654321,09873452,09832323,09434343');
+values('987654321'),
+('09873452'),
+('09832323'),
+('09434343');
 
 select * from DanhBa;
 
@@ -10,29 +13,34 @@ values(N'111 Nguyễn Trãi, Thanh Xuân, Hà Nội','1987-11-18');
 select * from NguoiDung;
 
 insert into DanhBaNguoiDung (Name,DanhBaId,NguoiDungId)
-values(N'Nguyễn Văn An',1,1);
+values(N'Nguyễn Văn An',1,1),
+(N'Nguyễn Văn An',2,1),
+(N'Nguyễn Văn An',3,1),
+(N'Nguyễn Văn An',4,1);
 
 select * from DanhBaNguoiDung;
 
 --Them du lieu cua moi nguoi
 insert into DanhBa (Phone)
-values('09866666,09899999,09988888');
+values('09866666'),
+('09899999'),
+('09988888');
 
 insert into NguoiDung(Address,DOB)
 values(N'10 Nguyễn Tuân, Thanh Xuân, Hà Nội','1985-12-10');
 
 insert into DanhBaNguoiDung(Name,DanhBaId,NguoiDungId)
-values(N'Lê Ngọc Hân',(select Id from DanhBa where Id=2),(select Id from NguoiDung where Id=2));
+values(N'Lê Ngọc Hân',5,2),(N'Lê Ngọc Hân',6,2),(N'Lê Ngọc Hân',7,2);
 
 --4
 --Liet ke danh sach nhung nguoi trong danh ba
-select Name from DanhBaNguoiDung;
+select distinct Name from DanhBaNguoiDung;
 --Liet ke danh sach so dien thoai co trong danh ba
 select * from DanhBa;
 
 --5
 --Liet ke danh sach nguoi trong danh ba theo Alphabet
-select Name from DanhBaNguoiDung order by Name asc;
+select distinct Name from DanhBaNguoiDung order by Name asc;
 --Liet ke cac so dien thoai cua nguoi co ten la Nguyen Van An
 select Phone from DanhBa where Id in
         (select DanhBaId from DanhBaNguoiDung where Name like N'Nguyễn Văn An');
@@ -40,7 +48,8 @@ select Phone from DanhBa where Id in
 
 --6
 --Tim so luong sdt cua moi nguoi trong danh ba
-
+select count(Phone) as SoLuongSoDT from DanhBa where Id in 
+    (select DanhBaId from DanhBaNguoiDung) group by Id;
 --Tim tong so nguoi trong danh ba sinh thang 12
 
 --Hien thi thong tin ve nguoi, cua tung sdt
