@@ -20,7 +20,8 @@ values(N'Nguyễn Văn An',1,1),
 
 select * from DanhBaNguoiDung;
 
---Them du lieu cua moi nguoi
+--Them du lieu moi
+--Nguoi 2
 insert into DanhBa (Phone)
 values('09866666'),
 ('09899999'),
@@ -31,6 +32,17 @@ values(N'10 Nguyễn Tuân, Thanh Xuân, Hà Nội','1985-12-10');
 
 insert into DanhBaNguoiDung(Name,DanhBaId,NguoiDungId)
 values(N'Lê Ngọc Hân',5,2),(N'Lê Ngọc Hân',6,2),(N'Lê Ngọc Hân',7,2);
+
+--Nguoi 3
+insert into DanhBa (Phone)
+values('123456789');
+
+insert into NguoiDung(Address,DOB)
+values(N'10 Thái Hà, Đống Đa, Hà Nội','2009-12-12');
+
+insert into DanhBaNguoiDung(Name,DanhBaId,NguoiDungId)
+values(N'Nguyễn Khôi Hoàng',8,3);
+
 
 --4
 --Liet ke danh sach nhung nguoi trong danh ba
@@ -46,13 +58,15 @@ select Phone from DanhBa where Id in
         (select DanhBaId from DanhBaNguoiDung where Name like N'Nguyễn Văn An');
 --Liet ke nguoi co ngay sinh 12/12/09
 
+
 --6
 --Tim so luong sdt cua moi nguoi trong danh ba
 select Name,count(DanhBaID) as SoLuongSoDT from DanhBaNguoiDung group by Name;
 --Tim tong so nguoi trong danh ba sinh thang 12
-select Name from DanhBaNguoiDung where NguoiDungId in
+select distinct Name from DanhBaNguoiDung where NguoiDungId in
     (select Id from NguoiDung where DOB like '%12%');
 --Hien thi thong tin ve nguoi, cua tung sdt
+
 --Hien thi toan bo thong tin ve nguoi, cua so dien thoai 123456789
 
 --7
