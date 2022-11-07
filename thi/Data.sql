@@ -19,3 +19,9 @@ select * from Parts where Price > 100;
 select * from Parts where CateID in
     (select CateID from Categories where CateName like N'CPU');
 --6.Create a view v_Parts contains the following information (PartID, PartName, CateName,Price, Quantity) from table Parts and Categories.
+create view v_Parts as
+select a.PartID,a.PartName,a.Quantity,a.Price,b.CateName
+from Parts a 
+left join Categories b on a.CateID = b.CateID;
+
+select * from v_Parts;
