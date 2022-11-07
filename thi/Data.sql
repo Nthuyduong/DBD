@@ -25,3 +25,8 @@ from Parts a
 left join Categories b on a.CateID = b.CateID;
 
 select * from v_Parts;
+--7.Create a view v_TopParts about 5 parts with the most expensive price.
+create view v_TopParts as
+select top 2 PartName from Parts order by Price desc;
+
+select * from v_TopParts;
